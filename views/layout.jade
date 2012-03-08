@@ -1,0 +1,18 @@
+!!!
+html
+  head
+    title Github Proxy
+
+    link(rel='stylesheet', href='/stylesheets/bootstrap/bootstrap.css')
+
+  body( style="padding-top: 60px" )
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          a.brand( href="/" ) Github Proxy
+          .nav-collapse
+            ul.nav
+              li: a( href="/milestones" ) Milestones
+              li: a( href="/labels" ) Labels
+
+    .container!= body

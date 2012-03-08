@@ -1,0 +1,5 @@
+user: User
+repo: repo
+account:
+  username: username
+  password: password
