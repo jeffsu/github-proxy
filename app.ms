@@ -50,12 +50,12 @@ app.get('/:u/:r/labels', #(req, res) {
   });
 });
 
-if (config.customs) {
-  for (var name in config.customs) {
-    var custom = config.customs[name];
-    app.get('/customs/' + name, #(req, res) {
-      data.getIssues(custom.paths, #(issues) {
-        res.render('custom' , { groups: order(custom, issues), labelGroup: custom.labelGroup });
+if (config.reports) {
+  for (var name in config.reports) {
+    var report = config.reports[name];
+    app.get('/reports/' + name, #(req, res) {
+      data.getIssues(report.paths, #(issues) {
+        res.render('report' , { groups: order(report, issues), labelGroup: report.labelGroup });
       }); 
     });
   }
@@ -103,5 +103,5 @@ function sortBy(config, issues) {
 }
 
 
-app.listen(3001);
+app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
