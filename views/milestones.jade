@@ -1,7 +1,28 @@
-each m in milestones
-  table(width="100%")
+
+table
+  thead
     tr
-      td(colspan=2): a(href="https://github.com/#{u}/#{r}/issues?milestone=#{m.number}&state=open")= m.title
+  each m in milestones
+    - var total = m.closed_issues + m.open_issues
+    - var url   = "https://github.com/" + u + "/" + r + "/issues?milestone=" + m.number
     tr
-      td(style="background-color:green; width: #{m.closed_issues/(m.closed_issues+m.open_issues)*100}%; height: 3px") 
-      td(style="background-color:black; width: #{m.open_issues/(m.closed_issues+m.open_issues)*100}%")
+      th(colspan=3): a(href="#{url}")= m.title
+    tr
+      td 
+        = "Closed: "
+        a(href="#{url}&state=closed") #{m.closed_issues}
+      td 
+        = "Open: "
+        a(href="#{url}&state=open") #{m.open_issues}
+      td 
+        = "Total: "
+        a(href=url) #{total}
+      td
+    tr
+      td(colspan=3)
+        table(width="500px", cellspacing=2)
+          tr
+            td(style="background-color:green; width: #{m.closed_issues/total*100}%; height: 5px")
+            td(style="background-color:#ccc; width: #{m.open_issues/total*100}%")
+    tr
+      td &nbsp;

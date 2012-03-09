@@ -1,3 +1,14 @@
-ul
+table(width="100%")
+  thead
+    tr
+      th ID
+      th Title
+      th Assignee
+      th State
   each t in tickets
-    li: a(href="https://github.com/#{u}/#{r}/issues/#{t.number}")= t.title
+    tr
+      td: a(href="https://github.com/#{u}/#{r}/issues/#{t.number}")= t.number
+      td= t.title
+      td= t.assignee.login
+      td= t.state
+
