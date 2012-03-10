@@ -1,10 +1,8 @@
 each issues, i in groups
-  if labelGroup
-    if labelGroup[i]
-      h3= labelGroup[i]
-    else
-      h3 Others
   if (issues && issues.length) 
+    if labelGroup
+      if labelGroup[i]
+        h3= labelGroup[i]
     table(width="100%")
       thead
         tr
@@ -18,8 +16,22 @@ each issues, i in groups
         tr
           td: a(href="#{i.url}")= i.number
           td= i.title
-          td= i.assignee ? i.assignee.login : "-nobody-"
+          td
+            if i.assignee
+              = i.assignee.login 
+            else
+              strong nobody
           td= i.state
-          td= i.labels ? i.labels.map(function ($1) { return $1.name }).join(', ') : "-none-";
-          td= i.milestone ? i.milestone.title : "-none-"
-
+          td
+            if i.labels
+              = i.labels.map(function ($1) { return $1.name }).join(', ')
+            else
+              strong none
+          td
+            if i.milestone 
+              = i.milestone.title
+            else
+              strong none
+  else
+    if labelGroup && labelGroup[i]
+      strong No issues for #{labelGroup[i]}
