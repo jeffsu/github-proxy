@@ -1,21 +1,25 @@
 each issues, i in groups
   if labelGroup
-    h3= labelGroup[i]
-  table(width="100%")
-    thead
-      tr
-        th ID
-        th Title
-        th Assignee
-        th State
-        th Labels
-        th Milestone
-    each i in issues
-      tr
-        td: a(href="#{i.url}")= i.number
-        td= i.title
-        td= i.assignee ? i.assignee.login : "-nobody-"
-        td= i.state
-        td= i.labels ? i.labels.map(function ($1) { return $1.name }).join(', ') : "-none-";
-        td= i.milestone ? i.milestone.title : "-none-"
+    if labelGroup[i]
+      h3= labelGroup[i]
+    else
+      h3 Others
+  if (issues && issues.length) 
+    table(width="100%")
+      thead
+        tr
+          th ID
+          th Title
+          th Assignee
+          th State
+          th Labels
+          th Milestone
+      each i in issues
+        tr
+          td: a(href="#{i.url}")= i.number
+          td= i.title
+          td= i.assignee ? i.assignee.login : "-nobody-"
+          td= i.state
+          td= i.labels ? i.labels.map(function ($1) { return $1.name }).join(', ') : "-none-";
+          td= i.milestone ? i.milestone.title : "-none-"
 

@@ -15,6 +15,10 @@ var config = require('./config')[0];
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
+  if (config.layout === false) {
+    app.set('view options', { layout: false });
+  }
+
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
@@ -48,6 +52,22 @@ app.get('/:u/:r/labels', #(req, res) {
   data.getLabels(u, r, #(labels) {
     res.render('labels', { labels: labels, u: u, r: r }) 
   });
+});
+
+app.get('/query', #(req, res) {
+  if (req.query.queries) {
+    var report = {};
+    report.labelGroup = req.query.groupLabels.split(/\r?\n/);
+    report.paths = req.query.queries.split(/\r?\n/);
+
+    data.getIssues(report.paths, #(issues) {
+      res.render('report' , { groups: order(report, issues), labelGroup: report.labelGroup });
+    });
+
+  } else {
+    res.render('query', {});
+  }
+
 });
 
 if (config.reports) {
