@@ -49,6 +49,7 @@ class Data {
       req(url, #(err, res, body) {
         count--;
         if (!err) {
+          try {
           foreach (var issue in JSON.parse(body)) {
             issue.labelHash = {};
             foreach (var l in issue.labels) {
@@ -56,6 +57,7 @@ class Data {
             }
             issues.push(issue);
           }
+          } catch(e) { console.log(e) }
         }
         if (count == 0) cb(issues);
       });
