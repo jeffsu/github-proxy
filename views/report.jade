@@ -14,7 +14,7 @@ each issues, i in groups
           th Milestone
       each i in issues
         tr
-          td: a(href="#{i.url}")= i.number
+          td: a(href="#{i.html_url}")= i.number
           td= i.title
           td
             if i.assignee

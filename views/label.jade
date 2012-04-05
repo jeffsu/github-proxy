@@ -9,6 +9,6 @@ table(width="100%")
     tr
       td: a(href="https://github.com/#{u}/#{r}/issues/#{t.number}")= t.number
       td= t.title
-      td= t.assignee.login
+      td= t.assignee ? t.assignee.login : '-none-'
       td= t.state
 
